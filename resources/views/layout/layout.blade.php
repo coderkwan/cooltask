@@ -10,19 +10,25 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body class="">
     <div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
+        <nav class="navbar  bg-body-tertiary">
+            <div class="container d-flex justify-content-between gap-4">
                 <a class="navbar-brand" href="/">Cool Task</a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav d-flex flex-row gap-4">
 						@auth
 							<li class="nav-item">
-								<a class="nav-link" href="#">Profile</a>
+								<a class="nav-link" href="/">Tasks</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/profile">Profile</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/logout">Logout</a>
 							</li>
 						@else
 							<li class="nav-item">
@@ -33,11 +39,12 @@
 							</li>
 						@endauth
                     </ul>
-                </div>
             </div>
         </nav>
 		<hr>
-        @yield('content')
+		<div class="container min-vh-100 py-5">
+			@yield('content')
+		</div>
 		<hr>
 		<footer>
 			<p>Cool Task &copy; 2024</p>

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Task extends Authenticatable
+class Task extends Model
 {
     protected $fillable = [
         'task',
@@ -11,4 +11,5 @@ class Task extends Authenticatable
         'status',
         'user_id',
     ];
+    public $timestamps = true;
 }
