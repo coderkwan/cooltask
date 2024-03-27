@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -50,16 +51,34 @@ class UserController extends Controller
 
     function logout(Request $request){
         Auth::logout();
- 
         $request->session()->invalidate();
- 
         $request->session()->regenerateToken();
  
         return redirect('/');
     }
 
-    function delete(){
+    function delete(Request $request){
+        $user = User::find(Auth::id());
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        $user->delete();
 
+        return redirect('/');
+    }
+
+  function update(Request $request){
+        $user = User::find(Auth::id());
+
+        $user->name = $request->input("name");
+        $user->email = $request->input("email");
+
+        if(strlen(trim($request->input("password"))) > 0){
+            $user->password = $request->input("password");
+        }
+
+        $user->save();
+
+        return Redirect::back();
     }
 
     function getDetails(){

@@ -1,8 +1,31 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url("https://fonts.bunny.net/css?family=Inter");
 
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+
+.btn {
+    border-radius: 0;
+}
+.form-control,
+.form-select {
+    border-radius: 0;
+}
+
+.Todo {
+    background-color: rgb(252, 251, 255);
+}
+.Pending {
+    background-color: rgb(255, 248, 244);
+    border-color: orange;
+}
+.Complete {
+    background-color: rgb(251, 255, 251);
+    border-color: greenyellow;
+}
+.small {
+    font-size: 10px;
+}
