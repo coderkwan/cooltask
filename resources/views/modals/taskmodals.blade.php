@@ -11,12 +11,12 @@
                  <div class="modal-body w-100 d-flex flex-column gap-3">
                      <input type="text" name="id" id="update_id" hidden>
                      <div class="d-flex flex-column gap-2">
-                         <label for="title">Update Task</label>
+                         <label for="title">Task Title</label>
                          <input required type="title" name="title" id="update_title" placeholder="Update footer"
                              class="form-control">
                      </div>
                      <div class="d-flex flex-column gap-2">
-                         <label for="content">Details</label>
+                         <label for="content">Task Description</label>
                          <textarea required rows="4" type="content" name="content" id="update_content"
                              placeholder="Change text color and remove broken link!" class="form-control"></textarea>
                      </div>
@@ -53,7 +53,7 @@
                          <input required type="title" name="title" placeholder="Update footer" class="form-control">
                      </div>
                      <div class="d-flex flex-column gap-2">
-                         <label for="content">Details</label>
+                         <label for="content">Task Description</label>
                          <textarea required rows="4" type="content" name="content" placeholder="Change text color and remove broken link!"
                              class="form-control"></textarea>
                      </div>
