@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -58,6 +59,7 @@ class UserController extends Controller
     }
 
     function delete(Request $request){
+        Task::where('user_id', Auth::id())->delete();
         $user = User::find(Auth::id());
         $request->session()->invalidate();
         $request->session()->regenerateToken();

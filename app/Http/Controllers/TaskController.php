@@ -40,8 +40,19 @@ class TaskController extends Controller
             }
         }
 
-        $tasks->appends($request->except('page'));
-        return view('home')->with(['tasks'=>$tasks, 'tab'=>$tab,'sort'=>$sort]);
+        if(count($tasks)< 1){
+            $all_tasks = Task::where(['user_id'=> Auth::id()])->orderBy('created_at', 'desc')->paginate(6);
+            if(count($all_tasks)> 0){
+                return view('home')->with(['tasks'=>$all_tasks, 'tab'=>'All','sort'=>'desc','filter_error'=>'No matches were found for your Filter!']);
+            }else{
+                $tasks->appends($request->except('page'));
+                return view('home')->with(['tasks'=>$tasks, 'tab'=>$tab,'sort'=>$sort]);
+            }
+        }else{
+            $tasks->appends($request->except('page'));
+            return view('home')->with(['tasks'=>$tasks, 'tab'=>$tab,'sort'=>$sort]);
+        }
+
     }
 
     function search(Request $request)

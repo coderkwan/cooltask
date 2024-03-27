@@ -4,17 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Cool Task</title>
-
-    <!-- Fonts -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>Cool Task - getting thing done!</title>
+    <meta name="description" content="A simple note taking app that will help you get things done.">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="">
+<body>
     <div>
         <nav class="navbar bg-body-tertiary">
             <div class="container border py-2 px-4 d-flex justify-content-between gap-4">
@@ -27,9 +26,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/profile">Profile</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">Logout</a>
-                        </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Sign In</a>
@@ -41,11 +37,12 @@
                 </ul>
             </div>
         </nav>
-        <div class="container min-vh-100 py-5">
+        <div class="container min-vh-100 py-2">
             @yield('content')
         </div>
         <hr>
-        <footer class="text-center py-5">
+        <footer class="text-center d-flex flex-column align-items-center gap-2 py-5">
+            <img src="/logo.png" alt="logo" style="width: 145px">
             <p>Your ultimate app for getting things done.</p>
             <p>Cool Task &copy; 2024</p>
         </footer>

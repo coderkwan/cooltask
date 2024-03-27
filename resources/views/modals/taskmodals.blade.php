@@ -23,8 +23,8 @@
                      <div class="d-flex flex-column gap-2">
                          <label for="password">Status</label>
                          <select name="status" id="update_status" class="form-control">
-                             <option value="Pending">Pending</option>
                              <option value="Todo">Todo</option>
+                             <option value="Pending">Pending</option>
                              <option value="Complete">Complete</option>
                          </select>
                      </div>

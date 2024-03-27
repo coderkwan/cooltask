@@ -13,15 +13,9 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name("register");
 
-
-Route::get('/forgot', function () {
-    return view('auth.forgot');
-})->name("forgot");
-
 Route::post("/login", [UserController::class, 'login'])->name("submit_login");
 Route::get("/logout", [UserController::class, 'logout'])->name("logout")->middleware('auth');
 Route::post("/register", [UserController::class, 'register'])->name("submit_register");
-Route::post("/forgot", [UserController::class, 'forgot'])->name("submit_forgot");
 Route::get('/profile',[UserController::class, 'getDetails'])->name("profile")->middleware("auth");
 Route::post('/profile/detele',[UserController::class, 'delete'])->name("delete_profile")->middleware("auth");
 Route::put('/profile/edit',[UserController::class, 'update'])->name("update_profile")->middleware("auth");

@@ -1,13 +1,27 @@
 @extends('layout.layout')
 @section('content')
-    <div>
+    <div class="">
         @if (isset($tasks) && count($tasks) > 0)
             @php
                 $filters = ['All', 'Todo', 'Pending', 'Complete'];
                 $sorters = ['asc' => 'Ascending', 'desc' => 'Descending'];
             @endphp
-            <div class="d-flex justify-content-between align-items-end my-4">
-                <div>
+            <div class="d-flex justify-content-center mb-5">
+                <form action="{{ route('search') }}" method="POST" class="d-flex gap-1 align-items-center">
+                    @csrf
+                    @method('POST')
+                    @if (isset($search))
+                        <input required type="text" name="search" id="search" placeholder="search your tasks.."
+                            value="{{ $search }}" class="form-control">
+                    @else
+                        <input required type="text" name="search" id="search" placeholder="search your tasks.."
+                            class="form-control">
+                    @endif
+                    <button class="btn btn-secondary" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="row my-5">
+                <div class="col-md-4 d-flex flex-wrap gap-1 justify-content-center justify-content-md-start">
                     @foreach ($filters as $f)
                         @if ($f == $tab)
                             <a href="/?filter={{ $f }}&sort={{ $sort }}"
@@ -18,13 +32,13 @@
                         @endif
                     @endforeach
                 </div>
-                <div>
-                    <div class="btn-group">
+                <div class="col-md-4 d-flex justify-content-center align-items-start">
+                    <div class="dropdown-center btn-group p-3 p-md-0 w-100">
                         <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Sort by creation date
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu text-center">
                             @foreach ($sorters as $sk => $s)
                                 @if ($sk == $sort)
                                     <li><a class="dropdown-item text-primary"
@@ -39,38 +53,33 @@
                         </ul>
                     </div>
                 </div>
-                <div>
-                    <form action="{{ route('search') }}" method="POST" class="d-flex gap-1 align-items-center">
-                        @csrf
-                        @method('POST')
-                        @if (isset($search))
-                            <input type="text" name="search" id="search" placeholder="search your tasks.."
-                                value="{{ $search }}" class="form-control">
-                        @else
-                            <input type="text" name="search" id="search" placeholder="search your tasks.."
-                                class="form-control">
-                        @endif
-                        <button class="btn btn-secondary" type="submit">Search</button>
-                    </form>
+                <div class="col-md-4 d-flex justify-content-end align-items-start">
+                    <button class="w-100 w-md-auto btn btn-primary rounded-0" type="button" data-bs-toggle="modal"
+                        data-bs-target="#createModal">+
+                        Create a
+                        new Task</button>
                 </div>
             @else
-                <div class="d-flex justify-content-center my-4">
+                <div class=" d-flex justify-content-center align-items-start">
+                    <button class="w-100 w-md-auto btn btn-primary rounded-0" type="button" data-bs-toggle="modal"
+                        data-bs-target="#createModal">+
+                        Create a
+                        new Task</button>
+                </div>
         @endif
-        <div>
-            <button class="btn btn-primary rounded-0" type="button" data-bs-toggle="modal" data-bs-target="#createModal">+
-                Create a
-                new Task</button>
-        </div>
     </div>
     <div>
         @if (isset($search_error))
             <p class="alert alert-warning text-center">{{ $search_error }}</p>
         @endif
+        @if (isset($filter_error))
+            <p class="alert alert-warning text-center">{{ $filter_error }}</p>
+        @endif
     </div>
     <div class="row">
         @if (isset($tasks) && count($tasks) > 0)
             @foreach ($tasks as $item)
-                <div class="col-4 p-2">
+                <div class="col-md-6 col-lg-4 p-2">
                     <div
                         class="{{ $item->status }} card p-4 h-100 d-flex flex-column justify-content-between gap-2 rounded-0">
                         <div class="d-flex flex-column gap-4">
@@ -90,7 +99,9 @@
                                                 data-title="{{ $item->task }}" data-status="{{ $item->status }}"
                                                 data-content="{{ $item->content }}">Update</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/delete/{{ $item->id }}">Delete</a></li>
+                                        <li class=""><a class=" dropdown-item"
+                                                href="/delete/{{ $item->id }}">Delete</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
