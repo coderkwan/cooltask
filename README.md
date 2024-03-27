@@ -1,6 +1,6 @@
 # Cool Task
 
-An app that gets thing done.
+An app that get things done.
 
 ## Requirements
 
@@ -10,8 +10,8 @@ An app that gets thing done.
 
 ## How to run the app
 
--   Start you database server
--   Copy .env.example to .env and update the database config
--   run `npm install` and `composer install` to install dependencies
--   run `php artisan migrate` to create the database and required tables
--   start the dev servers buy running both `php artisan serve` and `npm run dev`
+-   Start your database server
+-   Create a `.env` file and copy the contents of `.env.example` to `.env` and update the database config to match your database
+-   Run `npm install` and `composer install` to install dependencies
+-   Run `php artisan migrate` to create the database and required tables
+-   Start the dev servers buy running both `php artisan serve` and `npm run dev`
