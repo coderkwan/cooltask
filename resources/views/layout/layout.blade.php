@@ -37,7 +37,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="container min-vh-100 py-2">
+        <div class="container min-vh-100 py-5">
             @yield('content')
         </div>
         <hr>
