@@ -2,6 +2,11 @@ FROM richarvey/nginx-php-fpm:3.1.6
 
 COPY . .
 
+# Workaround https://bugs.php.net/bug.php?id=71880
+ENV LOG_STREAM="/tmp/stdout"
+RUN mkfifo $LOG_STREAM && chmod 777 $LOG_STREAM
+CMD ["/bin/sh", "-c", "php-fpm -D | tail -f $LOG_STREAM"]
+
 # Image config
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
@@ -18,9 +23,6 @@ ENV LOG_CHANNEL stderr
 ENV COMPOSER_ALLOW_SUPERUSER 1
 FROM php:7.1-fpm
 
-# Workaround https://bugs.php.net/bug.php?id=71880
-ENV LOG_STREAM="/tmp/stdout"
-RUN mkfifo $LOG_STREAM && chmod 777 $LOG_STREAM
-CMD ["/bin/sh", "-c", "php-fpm -D | tail -f $LOG_STREAM"]
+
 
 CMD ["/start.sh"]
