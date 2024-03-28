@@ -16,5 +16,11 @@ ENV LOG_CHANNEL stderr
 
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
+FROM php:7.1-fpm
+
+# Workaround https://bugs.php.net/bug.php?id=71880
+ENV LOG_STREAM="/tmp/stdout"
+RUN mkfifo $LOG_STREAM && chmod 777 $LOG_STREAM
+CMD ["/bin/sh", "-c", "php-fpm -D | tail -f $LOG_STREAM"]
 
 CMD ["/start.sh"]
