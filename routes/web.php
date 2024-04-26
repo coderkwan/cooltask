@@ -13,6 +13,10 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name("register");
 
+Route::get("/about", function(){
+    return view('about');
+});
+
 Route::post("/login", [UserController::class, 'login'])->name("submit_login");
 Route::get("/logout", [UserController::class, 'logout'])->name("logout")->middleware('auth');
 Route::post("/register", [UserController::class, 'register'])->name("submit_register");
