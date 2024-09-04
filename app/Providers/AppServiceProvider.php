@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
@@ -23,7 +24,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(UrlGenerator $url): void
     {
 
-        resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
+        if (App::environment('production')) {
+            resolve(\Illuminate\Routing\UrlGenerator::class)->forceScheme('https');
+        }
         Paginator::useBootstrap();
     }
 }
